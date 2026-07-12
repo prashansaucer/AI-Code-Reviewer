@@ -2,28 +2,213 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Code Reviewer</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CodeLens AI</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css', v='4.0') }}"
+    >
 </head>
+
 <body>
 
-<div class="container">
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
 
-    <h1>AI Code Reviewer</h1>
+    <main class="app-container">
 
-    <textarea id="code" placeholder="Paste your code here..."></textarea>
+        <header class="hero">
 
-    <button onclick="reviewCode()">
-        Review Code
-    </button>
+            <div class="logo">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span>CodeLens AI</span>
+            </div>
 
-    <div id="result"></div>
+            <h1>
+                Review, debug and
+                <span>optimize your code</span>
+            </h1>
 
-</div>
+            <p>
+                Detect bugs, improve security, analyze complexity and
+                generate complete optimized code using AI.
+            </p>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+        </header>
+
+        <section class="review-panel">
+
+            <div class="editor-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <p class="section-label">Source code</p>
+                        <h2>Code Editor</h2>
+                    </div>
+
+                    <button
+                        class="clear-button"
+                        type="button"
+                        onclick="clearCode()"
+                    >
+                        Clear
+                    </button>
+
+                </div>
+
+                <div class="editor-wrapper">
+
+                    <div class="editor-topbar">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+
+                        <span class="file-name">source.code</span>
+                    </div>
+
+                    <textarea
+                        id="code"
+                        placeholder="// Paste your complete code here..."
+                        spellcheck="false"
+                    ></textarea>
+
+                </div>
+
+                <div class="controls">
+
+                    <div class="mode-group">
+
+                        <label for="reviewMode">
+                            Review mode
+                        </label>
+
+                        <select id="reviewMode">
+                            <option value="detailed">
+                                Detailed Review
+                            </option>
+
+                            <option value="quick">
+                                Quick Review
+                            </option>
+
+                            <option value="security">
+                                Security Review
+                            </option>
+
+                            <option value="performance">
+                                Performance Review
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <button
+                        id="reviewButton"
+                        class="review-button"
+                        type="button"
+                        onclick="reviewCode()"
+                    >
+                        <span id="buttonText">Review Code</span>
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+                <p class="shortcut">
+                    Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to review
+                </p>
+
+            </div>
+
+            <div class="result-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <p class="section-label">AI analysis</p>
+                        <h2>Review Result</h2>
+                    </div>
+
+                    <span id="statusBadge" class="status-badge">
+                        Ready
+                    </span>
+
+                </div>
+
+                <div id="resultActions" class="result-actions hidden">
+
+                    <button onclick="copyOptimizedCode()">
+                        Copy Code
+                    </button>
+
+                    <button onclick="downloadOptimizedCode()">
+                        Download Code
+                    </button>
+
+                    <button onclick="downloadReview()">
+                        Download Review
+                    </button>
+
+                    <button onclick="reviewCode()">
+                        Regenerate
+                    </button>
+
+                </div>
+
+                <div id="result" class="result-box empty-state">
+
+                    <div class="empty-icon">✦</div>
+
+                    <h3>Your review will appear here</h3>
+
+                    <p>
+                        Paste your code and start the AI review.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="history-section">
+
+            <div class="history-heading">
+                <div>
+                    <p class="section-label">Recent activity</p>
+                    <h2>Review History</h2>
+                </div>
+
+                <button
+                    class="clear-button"
+                    onclick="clearHistory()"
+                >
+                    Clear History
+                </button>
+            </div>
+
+            <div id="historyList" class="history-list">
+                <p class="history-empty">No reviews yet.</p>
+            </div>
+
+        </section>
+
+        <footer>
+            Built with Flask and Gemini API
+        </footer>
+
+    </main>
+
+    <script
+        src="{{ url_for('static', filename='script.js', v='4.0') }}"
+    ></script>
 
 </body>
 </html>
