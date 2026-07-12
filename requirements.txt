@@ -1,5 +1,5 @@
 Flask
-python-dotenv
-requests
-Markdown
 gunicorn
+requests
+python-dotenv
+Markdown
